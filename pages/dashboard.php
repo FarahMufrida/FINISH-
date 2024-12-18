@@ -459,7 +459,7 @@ $actualEarnings = getTotalPenghasilanByMitraId($_SESSION['user_id']);
                                         <i class="bi bi-currency-dollar"></i>
                                     </div>
                                     <div class="ps-3">
-                                        <h6>Rp <?= number_format($actualEarnings, 0, ',', '.') ?></h6>
+                                        <h6>Rp <?= number_format($actualEarnings, 0, 0, ',', '.') ?></h6>
                                     </div>
                                 </div>
                             </div>
