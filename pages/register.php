@@ -101,7 +101,7 @@ checkAuthorized();
         cursor: pointer;
     }
     </style>
-    <script>
+    <!-- <script>
     document.querySelector('form').addEventListener('submit', function(event) {
       const password = document.getElementById('password').value;
       const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$/;
@@ -123,7 +123,34 @@ document.addEventListener('DOMContentLoaded', function() {
         this.textContent = type === 'password' ? 'Show' : 'Hide';
       });
     });
+</script> -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+      const togglePassword = document.querySelector('#togglePassword');
+      const passwordField = document.querySelector('#password');
+      
+      togglePassword.addEventListener('click', function() {
+        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordField.setAttribute('type', type);
+        this.textContent = type === 'password' ? 'Show' : 'Hide';
+      });
+    });
+
+    document.querySelector('form').addEventListener('submit', function (e) {
+  const passwordField = document.querySelector('#password');
+  const passwordValue = passwordField.value;
+
+  // Validasi kombinasi huruf dan angka maksimal 8 karakter
+  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)[a-zA-Z\d]{1,8}$/;
+  if (!passwordRegex.test(passwordValue)) {
+    e.preventDefault(); // Mencegah pengiriman form
+    alert('Password harus terdiri dari kombinasi huruf dan angka dengan maksimal 8 karakter.');
+  }
+});
+
+
 </script>
+
   </head>
   <body>
     <div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 9999;">
