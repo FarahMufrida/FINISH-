@@ -95,7 +95,7 @@ $payments = getPaymentData($_SESSION['user_id']);
                           <th>Metode</th>
                           <th>Status</th>
                           <th>Tanggal</th>
-                          <th>Aksi</th>
+                          <th>Actions</th>
                           </tr>
                       </thead>
                       <tbody>
@@ -210,7 +210,7 @@ $payments = getPaymentData($_SESSION['user_id']);
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer brand-bg-color">
     <div class="copyright text-light">
-      © Copyright <strong><span>WorkSmart</span></strong>. 
+      © Copyright <strong><span>WorkSmart</span></strong>. All Rights Reserved
     </div>
   </footer><!-- End Footer -->
 
@@ -269,7 +269,7 @@ $payments = getPaymentData($_SESSION['user_id']);
         ],  
         language: {
           search: "_INPUT_",
-          searchPlaceholder: "Search ...",
+          searchPlaceholder: "Search records...",
           lengthMenu: "_MENU_ records per page",
           info: "Showing _START_ to _END_ of _TOTAL_ entries",
           paginate: {
