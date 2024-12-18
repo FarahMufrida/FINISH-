@@ -89,9 +89,10 @@ $isMitra = ($_SESSION['role'] == 'mitra');
                     <i class="bi bi-currency-dollar"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>Rp. <?php echo number_format($penghasilan['total_earnings']); ?></h6>
-                    <span class="text-muted small pt-2">Total Penghasilan</span>
+                      <h6>Rp. <?php echo number_format($penghasilan['total_earnings'] ?? 0); ?></h6>
+                      <span class="text-muted small pt-2">Total Penghasilan</span>
                   </div>
+
                 </div>
               </div>
             </div>
