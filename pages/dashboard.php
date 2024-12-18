@@ -296,7 +296,7 @@ $actualEarnings = getTotalPenghasilanByMitraId($_SESSION['user_id']);
                                 <i class="bi bi-currency-dollar"></i>
                             </div>
                             <div class="ps-3">
-                                <h6>Rp <?= number_format($payments['total_amount'], 0, ',', '.') ?></h6>
+                                <h6>Rp <?= number_format($payments['total_amount'] ?? 0, 0, ',', '.') ?></h6>
                                 <span class="text-muted small pt-2"><?= $payments['total_payments'] ?> transaksi berhasil</span>
                             </div>
                         </div>
@@ -345,18 +345,27 @@ $actualEarnings = getTotalPenghasilanByMitraId($_SESSION['user_id']);
                         <!-- Rating Section -->
                         <div class="rating-wrapper mb-3">
                           <div class="stars">
-                              <?php
-                              $rating = round($workshop['average_rating']);
-                              for ($i = 1; $i <= 5; $i++) {
-                                  echo $i <= $rating ? 
-                                      '<i class="bi bi-star-fill text-warning"></i>' : 
-                                      '<i class="bi bi-star text-muted"></i>';
-                              }
-                              ?>
-                              <span class="ms-2 text-muted">
-                                  <?= number_format($workshop['average_rating'], 1) ?> 
-                                  (<?= $workshop['total_reviews'] ?> ulasan)
-                              </span>
+                          <?php
+                          $rating = isset($workshop['average_rating']) && is_numeric($workshop['average_rating']) 
+                              ? round($workshop['average_rating']) 
+                              : 0;
+
+                          for ($i = 1; $i <= 5; $i++) {
+                              echo $i <= $rating ? 
+                                  '<i class="bi bi-star-fill text-warning"></i>' : 
+                                  '<i class="bi bi-star text-muted"></i>';
+                          }
+                          ?>
+
+<span class="ms-2 text-muted">
+    <?= isset($workshop['average_rating']) && is_numeric($workshop['average_rating']) 
+        ? number_format($workshop['average_rating'], 1) 
+        : '0.0' ?> 
+    (<?= isset($workshop['total_reviews']) && is_numeric($workshop['total_reviews']) 
+        ? $workshop['total_reviews'] 
+        : '0' ?> ulasan)
+</span>
+
                           </div>
                         </div>
 
