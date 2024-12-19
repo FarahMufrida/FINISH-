@@ -241,7 +241,7 @@ ini_set('display_errors', 1);
               <div class="row gy-4">
                 <div class="col-lg-5">
                   <div class="profile d-flex align-items-center gap-3">
-                    <img src="landingpage/assets/img/anggota.jpg" alt="Profil CEO" class="profile-image">
+                    <img src="landingpage/assets/img/team2.jpg" alt="Profil CEO" class="profile-image">
                     <div>
                       <h4 class="profile-name">Anggota</h4>
                       <p class="profile-position">Pendiri WorkSmart</p>
@@ -253,7 +253,9 @@ ini_set('display_errors', 1);
                     <i class="bi bi-telephone-fill"></i>
                     <div>
                       <p class="contact-label">Informasi Workshop</p>
-                      <p class="contact-number">+62 8560 7601 828</p>
+                      <p class="contact-number">
+                          <a href="mailto:WorkSmart@gmail.com">worksmartwmk@gmail.com</a>
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -851,7 +853,9 @@ ini_set('display_errors', 1);
             <p>Jl. Mastrip, krajan Timur, Sumbersari,</p>
             <p>Kec.Sumbersari, Kab.Jember Jawa Timur 68121</p>
             <p class="mt-3"><strong>Telepon:</strong> <span>+62 856 0760 1828</span></p>
-            <p><strong>Email:</strong> <span>worksmartwmk@gmail.com</span></p>
+            <p class="contact-number"><strong>
+              <a href="mailto:WorkSmart@gmail.com">worksmartwmk@gmail.com</strong></a>
+          </p>
           </div>
           <div class="social-links d-flex mt-4">
             <a href="https://www.instagram.com/worksmart.wmk?igsh=amNkY3NwcWd5OG5l"><i class="bi bi-instagram"></i></a>

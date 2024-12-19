@@ -8,8 +8,8 @@
     <title class="brand-color">Success</title>
 
     <!-- Favicons -->
-    <link href="pages/assets/img/logo-worksmart.png" rel="icon" />
-    <link href="pages/assets/img/logo-worksmart.png" rel="apple-touch-icon" />
+    <link href="./assets/img/logo-worksmart.png" rel="icon" />
+    <link href="./assets/img/logo-worksmart.png" rel="apple-touch-icon" />
 
     <!-- External CSS Links -->
     <link
