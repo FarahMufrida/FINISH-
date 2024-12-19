@@ -8,7 +8,7 @@ if (isset($_GET['email'])) {
     $email = $_GET['email'];
 
     // Koneksi ke database untuk memverifikasi email (opsional, jika perlu)
-    $conn = new mysqli('localhost', 'root', '', 'worksmart');
+    $conn = new mysqli('localhost', 'root', '', 'worksmart1');
     if ($conn->connect_error) {
         die('Could not connect to the database');
     }

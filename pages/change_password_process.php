@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_password = $_POST['new_password'];
 
     // Koneksi ke database
-    $conn = new mysqli('localhost', 'root', '', 'worksmart');
+    $conn = new mysqli('localhost', 'root', '', 'worksmar1');
     if ($conn->connect_error) {
         die('Could not connect to the database');
     }
