@@ -111,7 +111,7 @@
                 </li>
         
                 <li class="nav-item">
-                  <a class="nav-link collapsed" href="data-pembayaran.php?u=aktivitas">
+                  <a class="nav-link collapsed" href="aktivitas.php">
                     <i class="bi bi-activity"></i>
                     <span>Aktivitas</span>
                   </a>

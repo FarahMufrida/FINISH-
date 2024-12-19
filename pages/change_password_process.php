@@ -1,6 +1,3 @@
-change_password_process.php
-
-
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ambil email dan password baru dari form

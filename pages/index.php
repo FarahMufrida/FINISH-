@@ -28,9 +28,15 @@ checkAuthorized();
 
   <!-- Template Main CSS File -->
   <link href="assets/css/brand.css" rel="stylesheet">
+  
+<!-- Vendor JS Files -->
+<script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Password Toggle Script -->
-    <script>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Password Toggle Script -->
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
       const togglePassword = document.querySelector('#togglePassword');
       const passwordField = document.querySelector('#password');
@@ -43,6 +49,7 @@ checkAuthorized();
     });
   </script>
   
+
   <style>
     body {
       background-color: #003366;
@@ -79,7 +86,6 @@ checkAuthorized();
       padding: 12px;
     }
   </style>
-
 </head>
 
 <body>
@@ -89,7 +95,7 @@ checkAuthorized();
         <div class="col-md-6">
           <div class="card rounded-4 mt-4 mb-4">
             <div class="card-header brand-color">
-              Masuk ke akun Anda
+              Log in to your account
             </div>
             <div class="card-body">
               <p class="text-muted">Masuk untuk mengakses fitur eksklusif, kolaborasi dengan mitra, dan kelola workshop Anda dengan mudah di Worksmart.</p>
@@ -104,7 +110,7 @@ checkAuthorized();
                 <div class="mb-3">
                   <label for="password" class="form-label brand-color">Password</label>
                   <div class="input-group">
-                    <input type="password" class="form-control password-input p-3" id="password" name="password" placeholder="Password" required>
+                    <input type="password" class="form-control password-input p-3" id="password" name="password" placeholder="password" required>
                     <button type="button" id="togglePassword" class="btn btn-outline-secondary password-toggle">Hide</button>
                   </div>
                 </div>
@@ -133,38 +139,37 @@ checkAuthorized();
                     <button type="submit" name="login" class="btn btn-primary rounded-pill btn-lg w-100">Log in</button>
                   </div>
                   <div class="col-md-6 d-flex align-items-center justify-content-end">
-                    <a href="forgot_password.php" class="link-primary">Lupa Password</a>
+                  <a href="forgot_password.php" class="link-primary">Forgot your password?</a>
                   </div>
                 </div>
 
-                <!-- <div class="text-center mb-3">
+             <!--   <div class="text-center mb-3">
                   <span>Or log in with</span>
                 </div>
-                <div class="row mb-3">
+               <div class="row mb-3">
                   <div class="col-md-6">
                     <button type="button" class="btn btn-outline-primary rounded-pill btn-lg w-100"><i class="bi bi-facebook me-2"></i> Facebook</button>
                   </div>
                   <div class="col-md-6">
                     <button type="button" class="btn btn-outline-primary rounded-pill btn-lg w-100"><i class="bi bi-google me-2"></i> Google</button>
                   </div>
-                </div>                
-                 -->
-                 <div class="text-muted text-center">
-                Bukan anggota? Dapatkan akses eksklusif ke pameran dan banyak lagi. <a href="../pages/register.php" class="link-primary">Gabung Sekarang</a>.
+                </div>  -->              
+                
+                <div class="text-muted text-center">
+                  Not a member? Get exclusive access to exhibitions and events, free admission every day, and much more. <a href="#" class="link-primary">Join today</a>.
                 </div>
-              </form>            
-            </div>
+              </form>            </div>
           </div>
         </div>
         <div class="col-md-6">
           <div class="card rounded-4 mt-4 mb-4">
             <div class="card-header brand-color">
-            Buat akun baru Anda
+              Create your new account
             </div>
             <div class="card-body">
               <p class="text-muted">Gabung dengan Worksmart untuk melihat workshop atau mengelola workshop, bertemu dengan mitra baru, dan menjangkau audiens yang lebih luas.</p>
               <div class="d-grid">
-                <a type="button" class="btn btn-outline-primary btn-lg rounded-pill" href="register.php">Buat akun</a>
+                <a type="button" class="btn btn-outline-primary btn-lg rounded-pill" href="register.php">Create an account</a>
               </div>
             </div>
           </div>

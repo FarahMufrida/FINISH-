@@ -30,7 +30,7 @@ try {
     $mail->Port       = 587;                                     // TCP port to connect to, use 465 for PHPMailer::ENCRYPTION_SMTPS above
 
     //Recipients
-    $mail->setFrom('worksmartwmk@gmail.com', 'WorkSmart');
+    $mail->setFrom('worksmartwmk@gmail.com', 'WorkSmart1');
     $mail->addAddress($email);     // Add a recipient
 
     $code = substr(str_shuffle('1234567890QWERTYUIOPASDFGHJKLZXCVBNM'), 0, 10);
@@ -38,10 +38,10 @@ try {
     // Content
     $mail->isHTML(true);                                  // Set email format to HTML
     $mail->Subject = 'Password Reset';
-    $mail->Body = 'To reset your password click <a href="http://localhost/worksmartfull/pages/change_password.php?email=' . ($email) . '">here</a>. </br>Reset your password in a day.';
+    $mail->Body = 'To reset your password click <a href="http://localhost/finish-/pages/change_password.php?email=' . ($email) . '">here</a>. </br>Reset your password in a day.';
 
 
-    $conn = new mysqli('localhost', 'root', '', 'worksmart');
+    $conn = new mysqli('localhost', 'root', '', 'worksmart1');
 
     if ($conn->connect_error) {
         die('Could not connect to the database.');

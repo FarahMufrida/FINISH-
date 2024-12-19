@@ -156,19 +156,25 @@ $role = $_SESSION['role'];
                                                 <span class="icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-2">
                                                   <i class="bi bi-calendar-event text-success"></i>
                                                 </span>
-                                                Mulai: <?= date('d F Y H:i', strtotime($data['start_date'])) ?>
+                                                Mulai: <?= date('d F Y ', strtotime($data['start_date'])) ?>
                                               </li>
                                               <li class="mb-3 d-flex align-items-center">
                                                 <span class="icon-wrapper bg-danger bg-opacity-10 rounded-circle p-2 me-2">
                                                   <i class="bi bi-calendar-check text-danger"></i>
                                                 </span>
-                                                Selesai: <?= date('d F Y H:i', strtotime($data['end_date'])) ?>
+                                                Selesai: <?= date('d F Y ', strtotime($data['end_date'])) ?>
                                               </li>
                                               <li class="mb-3 d-flex align-items-center">
                                                 <span class="icon-wrapper bg-warning bg-opacity-10 rounded-circle p-2 me-2">
                                                   <i class="bi bi-geo-alt text-warning"></i>
                                                 </span>
                                                 Lokasi: <?= $data['location'] ?>
+                                              </li>
+                                              <li class="mb-3 d-flex align-items-center">
+                                                <span class="icon-wrapper bg-success bg-opacity-10 rounded-circle p-2 me-2">
+                                                  <i class="bi bi-check-circle text-primary"></i>
+                                                </span>
+                                                Tipe: <?= ucfirst($data['tipe']) ?>
                                               </li>
                                           </ul>
                                       </div>
@@ -192,6 +198,7 @@ $role = $_SESSION['role'];
                                                 </span>
                                                 Status: <?= ucfirst($data['status']) ?>
                                               </li>
+    
                                           </ul>
                                       </div>
                                   </div>
@@ -202,32 +209,17 @@ $role = $_SESSION['role'];
                       <div class="col-lg-4">
                           <div class="card shadow-sm hover-shadow">
                               <div class="card-body">
-                                  <h5 class="card-title fw-bold"><i class="bi bi-lightning-charge"></i> Daftar Sekarang</h5>
+                                  <h5 class="card-title fw-bold"><i class="bi bi-lightning-charge"></i> Pesan Sekarang</h5>
                                   <div class="d-grid gap-2">
                                       <?php if($data['status'] == 'active'): ?>
                                           <button class="btn brand-btn rounded-pill btn-lg" type="button" onclick="nextStep()">
-                                              <i class="bi bi-cart-fill"></i> Beli Sekarang
+                                              <i class="bi bi-cart-fill"></i> Beli 
                                           </button>
-                                          <a href="pesan.php?mitra_id=<?= $data['mitra_id'] ?>&workshop_title=<?= urlencode($data['title']) ?>" class="btn btn-outline-info rounded-pill btn-lg" type="button">
-                                              <i class="bi bi-chat-text-fill"></i> Tanya Informasi
-                                      </a>
                                       <?php else: ?>
                                           <button class="btn btn-secondary btn-lg" type="button" disabled>
                                               <i class="bi bi-x-circle"></i> Workshop Tidak Tersedia
                                           </button>
                                       <?php endif; ?>
-                                  </div>
-                              </div>
-                          </div>
-                        
-                          <div class="card mt-3 shadow-sm hover-shadow">
-                              <div class="card-body">
-                                  <h5 class="card-title fw-bold"><i class="bi bi-share"></i> Share Workshop</h5>
-                                  <div class="d-flex justify-content-around">
-                                      <a href="#" class="btn btn-primary rounded-circle"><i class="bi bi-facebook"></i></a>
-                                      <a href="#" class="btn btn-info rounded-circle"><i class="bi bi-twitter"></i></a>
-                                      <a href="#" class="btn btn-success rounded-circle"><i class="bi bi-whatsapp"></i></a>
-                                      <a href="#" class="btn btn-danger rounded-circle"><i class="bi bi-envelope"></i></a>
                                   </div>
                               </div>
                           </div>

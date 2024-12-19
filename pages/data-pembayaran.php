@@ -80,7 +80,7 @@ $payments = getPaymentData($_SESSION['user_id']);
               <div class="card-body">
                 <h5 class="card-title">Data Pembayaran Saya</h5>
                 <p class="text-dark">Berikut adalah daftar pembayaran saya.</p>
-                <a href="dashboard.php"  class="brand-btn btn mt-2 mb-4 rounded-pill"><i class="bi bi-cart-plus me-2"></i>Pesan Workshop Lagi</a>
+                <a href="home.php"  class="brand-btn btn mt-2 mb-4 rounded-pill"><i class="bi bi-cart-plus me-2"></i>Pesan Workshop Lagi</a>
                 <a href="#" onclick="location.reload();" class="brand-btn btn mt-2 mb-4 rounded-pill"><i class="bi bi-arrow-clockwise me-2"></i>Refresh</a>              
               
                   <!-- Fetch Data Pembayaran Saya dari db -->

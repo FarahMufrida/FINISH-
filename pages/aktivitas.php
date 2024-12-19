@@ -83,16 +83,22 @@ $payments = getPaymentData($_SESSION['user_id']);
               <!--  <a href="dashboard.php"  class="brand-btn btn mt-2 mb-4 rounded-pill"><i class="bi bi-cart-plus me-2"></i>Pesan Workshop Lagi</a>
                 <a href="#" onclick="location.reload();" class="brand-btn btn mt-2 mb-4 rounded-pill"><i class="bi bi-arrow-clockwise me-2"></i>Refresh</a>              
               
-                  <!-- Fetch Data Pembayaran Saya dari db -->
+                   Fetch Data workshop Saya dari db -->
                     <div class="table-responsive">
                       <table class="table table-striped table-hover dt-responsive nowrap" id="participantTable" style="width:100%">
                       <thead>
                           <tr>
-                          <th>ID</th>
+                          <th>ID Pembayaran</th>
                           <th>Workshop</th>
                           <th>Mitra</th>
-                          <th>Status</th>
-                          <th>Tanggal</th>
+                          <th>Status Workshop</th>
+                          <th>Tanggal Mulai</th>
+                          <th>Tanggal Selesai</th>
+                          <th>Lokasi</th>
+                          <th>Tipe</th>
+                          <th>Media Pembelajaran</th>
+                          <th>Status Pembayaran</th>
+                          <th>Tanggal Pembayaran</th>
                           <th>Actions</th>
                           </tr>
                       </thead>
@@ -102,24 +108,32 @@ $payments = getPaymentData($_SESSION['user_id']);
                           foreach($payments as $payment) {
                           ?>
                           <tr>
-                              <td><?= $payment['payment_id'] ?></td>
-                              <td><?= $payment['workshop_title'] ?></td>
-                              <td><?= $payment['mitra_name'] ?></td>
-                              <td>
-                              <span class="badge <?= $payment['payment_status'] == 'successful' ? 'bg-success' : 'bg-danger' ?>">
-                                  <?= ucfirst($payment['payment_status']) ?>
-                              </span>
-                              </td>
-                              <td><?= date('d/m/Y H:i', strtotime($payment['payment_date'])) ?></td>
-                              <td>
-                              <div class="btn-group" role="group">
-                                  <button type="button" class="btn btn-sm btn-outline-info me-1 rounded-pill" data-bs-toggle="modal" data-bs-target="#detailModal<?= $payment['payment_id'] ?>" title="Detail"><i class="bi bi-eye"></i></button>
-                                  <?php if($payment['payment_status'] == 'successful'): ?>
-                                  <a href="print_nota.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-sm btn-outline-success rounded-pill" title="Download Invoice"><i class="bi bi-download"></i></a>
-                                  <?php endif; ?>
-                              </div>
-                              </td>
-                          </tr>
+                          
+                                <td><?= $payment['payment_id'] ?></td>
+                                <td><?= $payment['workshop_title'] ?></td>
+                                <td><?= $payment['mitra_name'] ?></td>
+                                <td><?= $payment['status'] ?></td>
+                                <td><?= date('d/m/Y', strtotime($payment['start_date'])) ?></td>
+                                <td><?= date('d/m/Y', strtotime($payment['end_date'])) ?></td>
+                                <td><?= $payment['location'] ?></td>
+                                <td><?= $payment['tipe'] ?></td>
+                                <td><?= $payment['media_pembelajaran'] ?></td>
+                                <td>
+                                    <span class="badge <?= $payment['payment_status'] == 'successful' ? 'bg-success' : 'bg-danger' ?>">
+                                        <?= ucfirst($payment['payment_status']) ?>
+                                    </span>
+                                </td>
+                                <td><?= date('d/m/Y H:i', strtotime($payment['payment_date'])) ?></td>
+                                <td>
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#detailModal<?= $payment['payment_id'] ?>"><i class="bi bi-eye"></i></button>
+                                        <?php if($payment['payment_status'] == 'successful'): ?>
+                                        <a href="print_nota.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></a>
+                                        <?php endif; ?>
+                                    </div>
+                                </td>
+                            </tr>
+                          
 
                           <!-- Detail Modal -->
                           <div class="modal fade" id="detailModal<?= $payment['payment_id'] ?>" tabindex="-1">
