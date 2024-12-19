@@ -1126,35 +1126,29 @@ function getPaymentData($user_id) {
     $sql = "SELECT 
                 p.*,
                 r.registration_date,
-                r.status AS registration_status,
-                w.title AS workshop_title,
+                r.status as registration_status,
+                w.title as workshop_title,
+                w.status,
+                w.tipe,
+                w.media_pembelajaran,
                 w.location,
                 w.start_date,
                 w.end_date,
-                w.status AS workshop_status,
-                w.tipe AS workshop_tipe,
-                w.media_pembelajaran,
-                CONCAT(m.first_name, ' ', m.last_name) AS mitra_name
+                CONCAT(m.first_name, ' ', m.last_name) as mitra_name
             FROM payments p
             INNER JOIN registrations r ON p.registration_id = r.registration_id
             INNER JOIN workshops w ON r.workshop_id = w.workshop_id
             INNER JOIN users m ON w.mitra_id = m.user_id
             WHERE r.user_id = ?
-            AND p.payment_status = 'successful'
             ORDER BY p.payment_date DESC";
-
+    
     $stmt = $conn->prepare($sql);
-    if (!$stmt) {
-        die("Error in query: " . $conn->error);
-    }
-
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
 
     $result = $stmt->get_result();
     return ($result->num_rows > 0) ? $result->fetch_all(MYSQLI_ASSOC) : [];
 }
-
 
 // Create workshop registration
 function createWorkshopRegistration($user_id, $workshop_id) {
