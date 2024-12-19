@@ -303,6 +303,7 @@ $actualEarnings = getTotalPenghasilanByMitraId($_SESSION['user_id']);
                     </div>
                 </div>
             </div>
+            
         </div>
 
        <!--   Title Section -->

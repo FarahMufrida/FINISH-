@@ -423,17 +423,55 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['logout'])) {
 
 
 // Profil
-// Update Profile
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
     checkAuth();
     require $db_path;
     
+    // Get form data
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+
+    // Handling image upload
+    $photo_name = '';
+    if (isset($_FILES['profile_photo']) && $_FILES['profile_photo']['error'] == 0) {
+        // Specify target directory
+        $target_dir = '../pages/assets/img/';
+        $photo_name = 'profile_' . time() . '_' . basename($_FILES['profile_photo']['name']);
+        $target_file = $target_dir . $photo_name;
+
+        // Validate image file type (JPG, PNG, JPEG, GIF)
+        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        if (in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])) {
+            if (move_uploaded_file($_FILES['profile_photo']['tmp_name'], $target_file)) {
+                // File upload success, store the file name in the database
+                // Update the user's profile with the new photo
+            } else {
+                $_SESSION['error'] = "Sorry, there was an error uploading your file.";
+                header("Location: ../pages/profil.php");
+                exit();
+            }
+        } else {
+            $_SESSION['error'] = "Only JPG, JPEG, PNG, and GIF files are allowed.";
+            header("Location: ../pages/profil.php");
+            exit();
+        }
+    }
+
+    // If no new photo is uploaded, keep the current photo
+    if (empty($photo_name)) {
+        $photo_name = $user_data['profile_photo']; // Use existing photo if no new upload
+    }
+
+    // Update the user's profile including the new photo (if uploaded)
     $update_result = updateUserProfile(
         $_SESSION['user_id'],
-        $_POST['first_name'],
-        $_POST['last_name'], 
-        $_POST['email'],
-        $_POST['phone']
+        $first_name,
+        $last_name, 
+        $email,
+        $phone,
+        $photo_name // Pass the new photo name
     );
     
     if($update_result) {
@@ -444,6 +482,26 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updateProfile'])) {
     header("Location: ../pages/profil.php");
     exit();
 }
+
+
+    // Update user profile in database
+    $update_result = updateUserProfile(
+        $_SESSION['user_id'],
+        $first_name,
+        $last_name,
+        $email,
+        $phone,
+        $photo_name // Pass photo name to be updated in database
+    );
+
+    if ($update_result) {
+        $_SESSION['success'] = "Profile updated successfully";
+    } else {
+        $_SESSION['error'] = "Failed to update profile";
+    }
+    header("Location: ../pages/profil.php");
+    exit();
+
 
 // Update Password
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['updatePassword'])) {

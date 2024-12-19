@@ -89,16 +89,15 @@ $payments = getPaymentData($_SESSION['user_id']);
                       <thead>
                           <tr>
                           <th>ID Pembayaran</th>
-                          <th>Workshop</th>
-                          <th>Mitra</th>
+                          <th>Nama Workshop</th>
+                          <th>Harga Workshop</th>
                           <th>Status Workshop</th>
                           <th>Tanggal Mulai</th>
                           <th>Tanggal Selesai</th>
                           <th>Lokasi</th>
                           <th>Tipe</th>
                           <th>Media Pembelajaran</th>
-                          <th>Status Pembayaran</th>
-                          <th>Tanggal Pembayaran</th>
+                          <th>Materi</th>
                           <th>Actions</th>
                           </tr>
                       </thead>
@@ -111,24 +110,18 @@ $payments = getPaymentData($_SESSION['user_id']);
                           
                                 <td><?= $payment['payment_id'] ?></td>
                                 <td><?= $payment['workshop_title'] ?></td>
-                                <td><?= $payment['mitra_name'] ?></td>
+                                <td><?= $payment['price'] ?></td>
                                 <td><?= $payment['status'] ?></td>
                                 <td><?= date('d/m/Y', strtotime($payment['start_date'])) ?></td>
                                 <td><?= date('d/m/Y', strtotime($payment['end_date'])) ?></td>
                                 <td><?= $payment['location'] ?></td>
                                 <td><?= $payment['tipe'] ?></td>
                                 <td><?= $payment['media_pembelajaran'] ?></td>
-                                <td>
-                                    <span class="badge <?= $payment['payment_status'] == 'successful' ? 'bg-success' : 'bg-danger' ?>">
-                                        <?= ucfirst($payment['payment_status']) ?>
-                                    </span>
-                                </td>
-                                <td><?= date('d/m/Y H:i', strtotime($payment['payment_date'])) ?></td>
+                                <td><button type="button" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#downloadModal<?= $payment['payment_id'] ?>"><i class="bi bi-download"></i></button> </td>
                                 <td>
                                     <div class="btn-group" role="group">
                                         <button type="button" class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#detailModal<?= $payment['payment_id'] ?>"><i class="bi bi-eye"></i></button>
                                         <?php if($payment['payment_status'] == 'successful'): ?>
-                                        <a href="print_nota.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-sm btn-outline-success"><i class="bi bi-download"></i></a>
                                         <?php endif; ?>
                                     </div>
                                 </td>
@@ -188,12 +181,30 @@ $payments = getPaymentData($_SESSION['user_id']);
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                                   <?php if($payment['payment_status'] == 'successful'): ?>
-                                  <a href="print_nota.php?payment_id=<?= $payment['payment_id']; ?>" class="btn brand-btn">Download Invoice</a>
                                   <?php endif; ?>
                                 </div>
                               </div>
                             </div>
                           </div>
+
+                   <!-- Modal Unduh untuk masing-masing payment_id -->
+                  <div class="modal fade" id="downloadModal<?= $payment['payment_id'] ?>" tabindex="-1" aria-labelledby="downloadModalLabel<?= $payment['payment_id'] ?>" aria-hidden="true">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title text-dark" id="downloadModalLabel<?= $payment['payment_id'] ?>">Unduh Materi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                          <!-- Tempat untuk memilih materi untuk diunduh -->
+                          <p class="text-dark">Silakan klik tombol di bawah untuk mengunduh materi yang terkait dengan pembayaran ini.</p>
+                          
+                          <!-- Tombol untuk mengunduh materi -->
+                          <a href="path_to_material.php?payment_id=<?= $payment['payment_id']; ?>" class="btn btn-primary">Unduh Materi</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                           <?php } ?>
                       </tbody>
                       </table>

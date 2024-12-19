@@ -1128,6 +1128,7 @@ function getPaymentData($user_id) {
                 r.registration_date,
                 r.status as registration_status,
                 w.title as workshop_title,
+                w.price,
                 w.status,
                 w.tipe,
                 w.media_pembelajaran,
@@ -1353,7 +1354,7 @@ function getUnreadMessages($user_id) {
 // Profil Function
 function getUserProfile($user_id) {
     require '../databases/database.php';
-    $sql = "SELECT user_id, username, first_name, last_name, email, phone, role, created_at 
+    $sql = "SELECT user_id, username, first_name, last_name, email, phone,profile_photo, role, created_at 
             FROM users WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $user_id);
@@ -1362,19 +1363,18 @@ function getUserProfile($user_id) {
 }
 
 
-function updateUserProfile($user_id, $first_name, $last_name, $email, $phone) {
+function updateUserProfile($user_id, $first_name, $last_name, $email, $phone, $profile_photo) {
     require '../databases/database.php';
 
     
-    $sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone = ? WHERE user_id = ?";
+    $sql = "UPDATE users SET first_name = ?, last_name = ?, email = ?, phone = ?, profile_photo =?  WHERE user_id = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssssi", $first_name, $last_name, $email, $phone, $user_id);
+    $stmt->bind_param("sssssi", $first_name, $last_name, $email, $phone,$profile_photo, $user_id);
     return $stmt->execute();
 }
 
 function updateUserPassword($user_id, $current_password, $new_password) {
     require '../databases/database.php';
-
     
     // Verify current password
     $sql = "SELECT password FROM users WHERE user_id = ?";

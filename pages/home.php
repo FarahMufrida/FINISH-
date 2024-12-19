@@ -87,7 +87,7 @@ ini_set('display_errors', 1);
             <ul>
               <li><a href="dashboard.php">Profil Saya</a></li>
               <?php if($role != 'admin' && $role != 'mitra') { ?>
-              <li><a href="data-pembayaran.php">Workshop Saya</a></li>
+              <li><a href="aktivitas.php">Workshop Saya</a></li>
               <li><a href="data-pembayaran.php">Riwayat Transaksi</a></li>
               <?php } ?>              
             </ul>
