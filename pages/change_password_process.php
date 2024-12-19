@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Update password di database
         $update_stmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
-        $update_stmt->bind_param("ss", $new_password_hash, $email);;
+        $update_stmt->bind_param("s", $new_password_hash, $email);;
 
         if ($update_stmt->execute()) {
             // Redirect ke halaman login setelah reset password sukses

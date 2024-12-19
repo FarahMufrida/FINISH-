@@ -159,7 +159,7 @@ function deleteUser($user_id) {
     }
 }
 
-// Fungsi untuk login
+//fungsi login
 function login($username_email, $password, $role) {
     global $conn;
     $username_email = mysqli_real_escape_string($conn, $username_email);
@@ -171,18 +171,24 @@ function login($username_email, $password, $role) {
 
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
+
+            // Verifikasi password menggunakan password_verify
         if (password_verify($password, $user['password'])) {
+            // Debug: menampilkan hasil password_verify
+            var_dump($password); // Password yang dimasukkan
+            var_dump($user['password']); // Password hash yang tersimpan di database
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['role'];
+
             return ['status' => 'success', 'message' => 'Login successful'];
         }
         return ['status' => 'error', 'message' => 'Incorrect password'];
     }
+
     return ['status' => 'error', 'message' => 'No user found with this username/email and role'];
 }
-
 
 
 // ======= DASHBOARD DATA ======
