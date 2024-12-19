@@ -1,7 +1,4 @@
 <?php
-session_start();
-
-// Mengecek apakah form disubmit
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ambil email dan password baru dari form
     $email = $_POST['email'];
@@ -13,64 +10,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die('Could not connect to the database');
     }
 
-    // Mengecek apakah email sudah ada di database
-    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // Update password di database dengan prepared statement untuk menghindari SQL Injection
+    $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT); // Hash password
 
-    if ($result->num_rows > 0) {
-       // Hash password baru
-        $new_password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+    // Gunakan prepared statement untuk menghindari SQL Injection
+    $stmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
+    $stmt->bind_param("ss", $new_password_hash, $email);
 
-        // Debug: menampilkan hash password
-        var_dump($new_password_hash); // Untuk memverifikasi apakah password ter-hash dengan benar
-
-        // Update password di database
-        $update_stmt = $conn->prepare("UPDATE users SET password = ? WHERE email = ?");
-        $update_stmt->bind_param("s", $new_password_hash, $email);;
-
-        if ($update_stmt->execute()) {
-            // Redirect ke halaman login setelah reset password sukses
-            $_SESSION['reset_password_success'] = "Password successfully updated. Please login again.";
-            header("Location: success.php");
-            exit();
-        } else {
-            echo "Error updating password.";
-        }
-
-        $update_stmt->close();
+    if ($stmt->execute()) {
+        // Redirect ke halaman success.html jika berhasil
+        header("Location: success.php");
+        exit(); // Pastikan script berhenti setelah redirect
     } else {
-        echo "Email not found in the database.";
+        echo "Error updating password.";
     }
 
-    // Menutup koneksi
+    // Menutup statement dan koneksi ke database
     $stmt->close();
     $conn->close();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reset Password</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-    <h2>Reset Password</h2>
-    <form method="POST" action="reset_password.php">
-        <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+  <head>
+    <!-- Document Title -->
+    <title class="brand-color">Forgot Password</title>
+<!-- Favicons -->
+<link href="pages/assets/img/logo-worksmart.png" rel="icon">
+    <!-- External CSS Links -->
+    <link
+      crossorigin="anonymous"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link href="pages/assets/css/brand.css" rel="stylesheet" />
+
+    <!-- Custom Styles -->
+    <style>
+      body {
+        background-color: #02396f;
+        font-family: "Arial", sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="loading-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(255,255,255,0.8); z-index: 9999;">
+      <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
         </div>
-        <div class="mb-3">
-            <label for="new_password" class="form-label">New Password</label>
-            <input type="password" class="form-control" id="new_password" name="new_password" required>
-        </div>
-        <button type="submit" class="btn btn-primary">Reset Password</button>
-    </form>
-</div>
-</body>
+      </div>
+    </div>
+    <!-- Your page content goes here -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
 </html>

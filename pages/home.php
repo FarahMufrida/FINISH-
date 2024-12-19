@@ -90,7 +90,6 @@ ini_set('display_errors', 1);
               <li><a href="data-pembayaran.php">Workshop Saya</a></li>
               <li><a href="data-pembayaran.php">Riwayat Transaksi</a></li>
               <?php } ?>              
-              <li><a href="pesan.php">Pesan</a></li>
             </ul>
           </li>
           <?php } ?>
@@ -425,14 +424,6 @@ ini_set('display_errors', 1);
                         <img src="assets/img/workshops/<?= htmlspecialchars($workshop['banner']) ?>" class="img-fluid w-100" alt="<?= htmlspecialchars($workshop['title']) ?>">
                         <div class="workshop-highlights position-absolute bottom-0 start-0 end-0 p-3 bg-dark bg-opacity-75 text-white">
                           <div class="d-flex justify-content-around">
-                            <div class="highlight-item text-center">
-                              <i class="bi bi-people-fill fs-4"></i>
-                              <div class="mt-2">30 Peserta</div>
-                            </div>
-                            <div class="highlight-item text-center">
-                              <i class="bi bi-clock-fill fs-4"></i>
-                              <div class="mt-2">24 Jam</div>
-                            </div>
                           </div>
                         </div>
                       </div>
@@ -446,8 +437,8 @@ ini_set('display_errors', 1);
                           <div>
                             <h6 class="mb-2">Jadwal</h6>
                             <p class="mb-0 text-muted">
-                              Mulai: <?= date('d M Y H:i', strtotime($workshop['start_date'])) ?><br>
-                              Selesai: <?= date('d M Y H:i', strtotime($workshop['end_date'])) ?>
+                              Mulai: <?= date('d M Y ', strtotime($workshop['start_date'])) ?><br>
+                              Selesai: <?= date('d M Y ', strtotime($workshop['end_date'])) ?>
                             </p>
                           </div>
                         </div>
@@ -465,7 +456,7 @@ ini_set('display_errors', 1);
                             <i class="bi bi-tag-fill text-warning fs-4"></i>
                           </div>
                           <div>
-                            <h6 class="mb-2">Investasi</h6>
+                            <h6 class="mb-2">Harga</h6>
                             <p class="mb-0 text-muted">Rp <?= number_format($workshop['price'], 0, ',', '.') ?></p>
                           </div>
                         </div>
@@ -598,7 +589,7 @@ ini_set('display_errors', 1);
                   </button>
                   <?php if($isLogin): ?>
                     <a href="detail-workshop.php?workshop_id=<?= $workshop['workshop_id'] ?>" class="btn btn-primary rounded-pill px-4">
-                      <i class="bi bi-arrow-right-circle me-2"></i>Daftar Sekarang
+                      <i class="bi bi-arrow-right-circle me-2"></i>Pesan Sekarang
                     </a>
                   <?php else: ?>
                     <a href="register.php" class="btn btn-primary rounded-pill px-4">

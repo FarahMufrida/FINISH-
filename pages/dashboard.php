@@ -305,94 +305,8 @@ $actualEarnings = getTotalPenghasilanByMitraId($_SESSION['user_id']);
             </div>
         </div>
 
-          <!-- Title Section -->
-          <hr class="text-white">
-          <div class="row mb-4">
-            <div class="col-12 text-center">
-                <h3 class="text-white fw-bold">
-                    <i class="bi bi-lightbulb"></i> Ingin Mencari Workshop Lagi?
-                </h3>
-                <p class="text-white">
-                    Temukan berbagai workshop menarik yang sesuai dengan minat dan kebutuhanmu!
-                    <i class="bi bi-arrow-down-circle-fill"></i>
-                </p>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-md-12">
-                <div class="input-group">
-                    <span class="input-group-text"><i class="bi bi-search"></i></span>
-                    <input type="text" class="form-control" id="searchWorkshop" placeholder="Cari workshop...">
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <?php 
-            foreach($workshops as $workshop) { 
-            ?>
-            <div class="col-lg-4 col-md-6 mb-4">
-                <div class="card h-100 workshop-card">
-                    <img src="assets/img/workshops/<?= $workshop['banner'] ?>" class="card-img-top" alt="Workshop Banner" style="height: 200px; object-fit: cover;">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center mb-2">
-                            <span class="badge <?= ($workshop['status'] == 'active') ? 'bg-success' : 'bg-danger' ?>"><?= $workshop['status'] ?></span>
-                            <small class="text-muted">By <?= $workshop['mitra_first_name'] . ' ' . $workshop['mitra_last_name'] ?></small>
-                        </div>
-                        <h5 class="card-title text-truncate"><?= $workshop['title'] ?></h5>
-                        <p class="card-text text-truncate brand-color"><?= $workshop['description'] ?></p>
-                        
-                        <!-- Rating Section -->
-                        <div class="rating-wrapper mb-3">
-                          <div class="stars">
-                          <?php
-                          $rating = isset($workshop['average_rating']) && is_numeric($workshop['average_rating']) 
-                              ? round($workshop['average_rating']) 
-                              : 0;
-
-                          for ($i = 1; $i <= 5; $i++) {
-                              echo $i <= $rating ? 
-                                  '<i class="bi bi-star-fill text-warning"></i>' : 
-                                  '<i class="bi bi-star text-muted"></i>';
-                          }
-                          ?>
-
-<span class="ms-2 text-muted">
-    <?= isset($workshop['average_rating']) && is_numeric($workshop['average_rating']) 
-        ? number_format($workshop['average_rating'], 1) 
-        : '0.0' ?> 
-    (<?= isset($workshop['total_reviews']) && is_numeric($workshop['total_reviews']) 
-        ? $workshop['total_reviews'] 
-        : '0' ?> ulasan)
-</span>
-
-                          </div>
-                        </div>
-
-                        <div class="workshop-details">
-                            <div class="mb-2">
-                                <i class="bi bi-geo-alt"></i> <?= $workshop['location'] ?>
-                            </div>
-                            <div class="mb-2">
-                                <i class="bi bi-calendar-event"></i> <?= date('d M Y', strtotime($workshop['start_date'])) ?>
-                            </div>
-                            <div class="mb-2">
-                                <i class="bi bi-people-fill"></i> <?= $workshop['total_participants'] ?> peserta
-                            </div>
-                            <div class="mb-2">
-                                <b><i class="bi bi-cash"></i> Rp <?= number_format($workshop['price'], 0, ',', '.') ?></b>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer bg-transparent border-top-0">
-                        <a href="detail-workshop.php?workshop_id=<?= $workshop['workshop_id'] ?>" class="btn brand-btn w-100 rounded-pill">
-                            <i class="bi bi-cart-plus"></i> Pesan Sekarang
-                        </a>
-                    </div>              
-                </div>
-            </div>
-            <?php } ?>
-        </div>
+       <!--   Title Section -->
+         
       <!-- Dashboard Mitra-->
       <?php }else if($role=='mitra'){ ?>
         <div class="row">
@@ -508,13 +422,8 @@ $actualEarnings = getTotalPenghasilanByMitraId($_SESSION['user_id']);
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer brand-bg-color">
-    <div class="copyright text-light">
-      &copy; Copyright <strong><span>WorkSmart</span></strong>. All Rights Reserved
-    </div>
-  </footer><!-- End Footer -->
+  
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
   <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>

@@ -159,7 +159,7 @@ function deleteUser($user_id) {
     }
 }
 
-//fungsi login
+// Fungsi untuk login
 function login($username_email, $password, $role) {
     global $conn;
     $username_email = mysqli_real_escape_string($conn, $username_email);
@@ -171,24 +171,18 @@ function login($username_email, $password, $role) {
 
     if (mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
-
-            // Verifikasi password menggunakan password_verify
         if (password_verify($password, $user['password'])) {
-            // Debug: menampilkan hasil password_verify
-            var_dump($password); // Password yang dimasukkan
-            var_dump($user['password']); // Password hash yang tersimpan di database
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['first_name'] = $user['first_name'];
             $_SESSION['email'] = $user['email'];
             $_SESSION['role'] = $user['role'];
-
             return ['status' => 'success', 'message' => 'Login successful'];
         }
         return ['status' => 'error', 'message' => 'Incorrect password'];
     }
-
     return ['status' => 'error', 'message' => 'No user found with this username/email and role'];
 }
+
 
 
 // ======= DASHBOARD DATA ======
@@ -1132,26 +1126,35 @@ function getPaymentData($user_id) {
     $sql = "SELECT 
                 p.*,
                 r.registration_date,
-                r.status as registration_status,
-                w.title as workshop_title,
+                r.status AS registration_status,
+                w.title AS workshop_title,
                 w.location,
                 w.start_date,
                 w.end_date,
-                CONCAT(m.first_name, ' ', m.last_name) as mitra_name
+                w.status AS workshop_status,
+                w.tipe AS workshop_tipe,
+                w.media_pembelajaran,
+                CONCAT(m.first_name, ' ', m.last_name) AS mitra_name
             FROM payments p
             INNER JOIN registrations r ON p.registration_id = r.registration_id
             INNER JOIN workshops w ON r.workshop_id = w.workshop_id
             INNER JOIN users m ON w.mitra_id = m.user_id
             WHERE r.user_id = ?
+            AND p.payment_status = 'successful'
             ORDER BY p.payment_date DESC";
-    
+
     $stmt = $conn->prepare($sql);
+    if (!$stmt) {
+        die("Error in query: " . $conn->error);
+    }
+
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
 
     $result = $stmt->get_result();
     return ($result->num_rows > 0) ? $result->fetch_all(MYSQLI_ASSOC) : [];
 }
+
 
 // Create workshop registration
 function createWorkshopRegistration($user_id, $workshop_id) {
